@@ -27,7 +27,7 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-    OpenDoor();
+   
 }
 
 
@@ -37,5 +37,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+    if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+    {
+         OpenDoor();
+    }
 }
 
