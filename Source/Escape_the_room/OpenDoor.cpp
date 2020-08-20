@@ -13,6 +13,13 @@ UOpenDoor::UOpenDoor()
 	// ...
 }
 
+void UOpenDoor::OpenDoor()
+{
+    AActor* Object = GetOwner();
+    FRotator NewRotation = FRotator(0.f, 60.f, 0.f);
+    Object->SetActorRotation(NewRotation);
+}
+
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
@@ -20,9 +27,7 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-    AActor* Object = GetOwner();
-    FRotator NewRotation = FRotator(0.f, 60.f, 0.f);
-    Object->SetActorRotation(NewRotation);
+    OpenDoor();
 }
 
 
