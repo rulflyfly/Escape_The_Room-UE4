@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -15,6 +16,7 @@ class ESCAPE_THE_ROOM_API UGrabber : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UGrabber();
+    FindPhysicsCompo
 
 protected:
 	// Called when the game starts
@@ -26,4 +28,11 @@ public:
 
 private:
     float Reach = 100.f;
+    
+    UPhysicsHandleComponent* PhysicsHandle = nullptr;
+    UInputComponent* InputComponent = nullptr;
+    
+    // Ray-cast and grab what's in reach
+    void Grab();
+    void Drop();
 };

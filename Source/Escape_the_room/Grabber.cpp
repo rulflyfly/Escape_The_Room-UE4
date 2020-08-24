@@ -23,7 +23,43 @@ void UGrabber::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+    
+    if (InputComponent)
+    {
+        // Input Component Found
+        UE_LOG(LogTemp, Warning, TEXT("ALL IS GOOD"));
+        // Bind input action
+        InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+        InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Drop);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("The %s is missing the input component"), *GetOwner()->GetName());
+    }
+}
+
+void UGrabber::FindPhysicsComponent()
+{
+    PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+    InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+    if (PhysicsHandle)
+    {
+        // PhysicsHandle is found
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("The %s is missing the handle"), *GetOwner()->GetName());
+    }
+}
+
+void UGrabber::Grab()
+{
+    UE_LOG(LogTemp, Warning, TEXT("GRAB GRAB GRAB!!!"));
+}
+
+void UGrabber::Drop()
+{
+    UE_LOG(LogTemp, Warning, TEXT("DROPEDDY DROP!!!"));
 }
 
 
@@ -67,6 +103,11 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
                     FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
                     TraceParameters
                     );
+    AActor* HitActor = Hit.GetActor();
+    if (HitActor)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("you hit %s!"), *HitActor->GetName());
+    }
     
     
     // See what we hit
