@@ -16,7 +16,15 @@ class ESCAPE_THE_ROOM_API UGrabber : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UGrabber();
-    FindPhysicsCompo
+    // Ray-cast and grab what's in reach
+    void Grab();
+    void Drop();
+    void FindPhysicsHandleComponent();
+    void SetUpInputComponent();
+    
+    // return hit for the first physics body in reach
+    FHitResult GetFirstPhysicsBodyInReach() const;
+    
 
 protected:
 	// Called when the game starts
@@ -32,7 +40,4 @@ private:
     UPhysicsHandleComponent* PhysicsHandle = nullptr;
     UInputComponent* InputComponent = nullptr;
     
-    // Ray-cast and grab what's in reach
-    void Grab();
-    void Drop();
 };
