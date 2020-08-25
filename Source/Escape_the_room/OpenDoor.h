@@ -20,6 +20,7 @@ public:
     
     void OpenDoor();
     void CloseDoor();
+    float GetTotalMassOfActorsOnPlate();
 
 protected:
 	// Called when the game starts
@@ -40,6 +41,5 @@ private:
     float DoorCloseDelay = .5f;
     
     float LastDoorOpenTime;
-    AActor* ActorThatOpens;
     AActor* Owner;
 };
