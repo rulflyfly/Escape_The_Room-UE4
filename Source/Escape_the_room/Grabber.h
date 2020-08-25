@@ -21,6 +21,8 @@ public:
     void Drop();
     void FindPhysicsHandleComponent();
     void SetUpInputComponent();
+    FVector GetReachLineStart() const;
+    FVector GetReachLineEnd() const;
     
     // return hit for the first physics body in reach
     FHitResult GetFirstPhysicsBodyInReach() const;
