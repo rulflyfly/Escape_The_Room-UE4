@@ -20,6 +20,7 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
     
+    void OpenDoor();
     void CloseDoor();
     float GetTotalMassOfActorsOnPlate();
     
@@ -35,12 +36,15 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+    UPROPERTY(EditAnywhere)
+    float OpenAngle = -90.f;
     
     UPROPERTY(EditAnywhere)
     ATriggerVolume* PressurePlate = nullptr;
     
     UPROPERTY(EditAnywhere)
-    float TriggerMass = 30.f;
+    float DoorCloseDelay = .5f;
     
+    float LastDoorOpenTime;
     AActor* Owner = nullptr;
 };
