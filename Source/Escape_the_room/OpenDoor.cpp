@@ -38,8 +38,9 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
     TArray<AActor*> OverlappingActors;
     PressurePlate->GetOverlappingActors(OUT OverlappingActors);
     // Iterate through them adding their masss
-    for (auto& Actor : OverlappingActors)
+    for (const auto* Actor : OverlappingActors)
     {
+        TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
         UE_LOG(LogTemp, Warning, TEXT("%s is in the spot!"), *Actor->GetName());
     }
     
@@ -55,7 +56,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-    if (GetTotalMassOfActorsOnPlate() > 50.f)
+    if (GetTotalMassOfActorsOnPlate() > 30.f)
     {
         OpenDoor();
         LastDoorOpenTime = GetWorld()->GetTimeSeconds();
